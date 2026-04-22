@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>2048</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <h1>2048</h1>
+        <div class="scores">
+          <div class="score">
+            <span class="score-label">SCORE</span>
+            <span class="score-value" id="score">0</span>
+          </div>
+          <button id="new-game" type="button">New Game</button>
+        </div>
+      </header>
+
+      <section class="board-wrap">
+        <div class="board" id="board" aria-label="Game board"></div>
+        <div class="overlay" id="overlay" hidden>
+          <div class="overlay-inner">
+            <h2 id="overlay-title">You won!</h2>
+            <p id="overlay-subtitle">Reached 2048.</p>
+            <button id="overlay-new" type="button">New Game</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="controls" aria-label="Controls">
+        <div class="pad">
+          <button class="dpad dpad-up" data-dir="up" aria-label="Up">&#9650;</button>
+          <div class="pad-row">
+            <button class="dpad dpad-left" data-dir="left" aria-label="Left">&#9664;</button>
+            <button class="dpad dpad-down" data-dir="down" aria-label="Down">&#9660;</button>
+            <button class="dpad dpad-right" data-dir="right" aria-label="Right">&#9654;</button>
+          </div>
+        </div>
+        <p class="hint-kbd">Tip: arrow keys also work.</p>
+      </section>
+
+      <section class="panel hint-panel" aria-label="Hint">
+        <div class="panel-header">
+          <h3>Hint</h3>
+          <label class="provider-picker">
+            <span>Provider</span>
+            <select id="provider"></select>
+          </label>
+        </div>
+        <div class="panel-row">
+          <button id="hint-btn" type="button">Show Hint</button>
+          <div id="hint-out" class="hint-out" aria-live="polite">No hint yet.</div>
+        </div>
+        <table id="hint-scores" class="hint-scores" hidden>
+          <thead>
+            <tr><th>Direction</th><th>Score</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="panel solve-panel" aria-label="Solve">
+        <div class="panel-header">
+          <h3>Auto-Solve <span class="panel-note">(Local only, 2 moves/sec)</span></h3>
+        </div>
+        <div class="panel-row">
+          <button id="solve-btn" type="button">Start Solve</button>
+          <span id="solve-status" class="solve-status">idle</span>
+        </div>
+        <ul id="solve-log" class="solve-log" aria-live="polite"></ul>
+      </section>
+
+      <details class="panel settings-panel">
+        <summary>Settings</summary>
+        <div class="settings-body">
+          <label class="slider-row">
+            <span>Chance of spawning a 4</span>
+            <input id="four-prob" type="range" min="0" max="50" step="1" value="10" />
+            <output id="four-prob-val">10%</output>
+          </label>
+          <p class="small">Applies to the next new game.</p>
+
+          <h4>Providers</h4>
+          <ul id="provider-status" class="provider-status"></ul>
+          <p class="small">
+            API keys load from your <code>.env</code> at startup. Never entered in the UI,
+            never sent anywhere except the provider's HTTPS endpoint.
+          </p>
+        </div>
+      </details>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
