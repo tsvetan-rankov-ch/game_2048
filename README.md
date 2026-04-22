@@ -5,6 +5,8 @@ and a pluggable AI "Hint" feature. Runs entirely on your machine. The default
 solver (Expectimax) needs no network access and no API keys; optional LLM backends
 (OpenAI, Anthropic, Google) are available if you provide your own keys via `.env`.
 
+![2048 demo](demo.png)
+
 ## Features
 
 - Classic 2048 rules on a 4x4 board. Starts with 2 tiles. Spawns a `2` (90%) or `4` (10%) after each valid move, configurable in the UI.
@@ -25,7 +27,7 @@ solver (Expectimax) needs no network access and no API keys; optional LLM backen
 ## Install
 
 ```bash
-git clone <this-repo-url> game_2048
+git clone https://github.com/tsvetan-rankov-ch/game_2048.git game_2048
 cd game_2048
 
 python3 -m venv .venv

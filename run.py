@@ -5,16 +5,16 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-_SRC = Path(__file__).resolve().parent / "src"
-if str(_SRC) not in sys.path:
-    sys.path.insert(0, str(_SRC))
-
-from game2048.config import load_settings  # noqa: E402
-from game2048.logging_setup import configure_logging  # noqa: E402
-from game2048.web.app import create_app  # noqa: E402
-
 
 def main() -> None:
+    src = Path(__file__).resolve().parent / "src"
+    if str(src) not in sys.path:
+        sys.path.insert(0, str(src))
+
+    from game2048.config import load_settings
+    from game2048.logging_setup import configure_logging
+    from game2048.web.app import create_app
+
     settings = load_settings()
     configure_logging()
     app = create_app(settings)
